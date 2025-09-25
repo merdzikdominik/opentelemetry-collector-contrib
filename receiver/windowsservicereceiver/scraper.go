@@ -118,7 +118,7 @@ func (ws *windowsServiceScraper) scrape(_ context.Context) (pmetric.Metrics, err
 			defer wg.Done()
 			defer func() { <-sem }()
 
-			svc, err := getService(&ws.mgr, n)
+			svc, err := updateService(&ws.mgr, n)
 			if err != nil {
 				results <- result{err: err}
 				return
