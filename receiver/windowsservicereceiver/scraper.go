@@ -135,6 +135,11 @@ func (ws *windowsServiceScraper) scrape(_ context.Context) (pmetric.Metrics, err
 			}
 
 			val := int64(svc.status.State)
+
+			if val < 1 || val > 7 {
+				val = 0
+			}
+
 			startAttr := mapStartTypeToAttr(svc.config.StartType)
 
 			results <- result{name: n, val: val, startAttr: startAttr}
